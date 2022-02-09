@@ -1,5 +1,6 @@
 import React from 'react';
 import profile from '../img/profile.jpg';
+import '../css/base.css';
 import '../css/profile.css';
 import { IoLogoFacebook } from "react-icons/io5";
 import { IoLogoWhatsapp } from "react-icons/io5";
