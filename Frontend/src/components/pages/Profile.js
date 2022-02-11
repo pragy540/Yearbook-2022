@@ -1,5 +1,5 @@
 import React from 'react';
-import profile from '../img/profile.jpg';
+import profileimg from '../img/profile.jpg';
 import '../css/base.css';
 import '../css/profile.css';
 import { IoLogoFacebook } from "react-icons/io5";
@@ -9,19 +9,45 @@ import { IoAdd } from "react-icons/io5";
 import dummy1 from '../img/dummy1.jpg';
 import dummy2 from '../img/dummy2.jpg';
 import dummy3 from '../img/dummy3.jpg';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
-const Profile = () => {
+
+const Profile = ({profile}) => {
+    const [person, setPerson] = useState({
+        name : '',
+        rollno: ''
+    })
+    const inputsHandler = (e) =>{
+        setPerson( {...person, [e.target.name]: e.target.value} )
+    }
+    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        axios.post("http://127.0.0.1:8000/api/addprof/", person)
+            .then(function(res){
+                console.log(res)
+            })
+    }
+     
     return (
         <div>
-            <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
+            <div className="background">
+        <div className="shape"></div>
+        <div className="shape"></div>
+        <div className="shape"></div>
     </div>
             <div className='dp-section'>
                
                 <div className='dp blur-back'>
-                    <img src={profile}></img>
+                    {
+                        profile.map((prof)=>(
+                            <>
+                                <h2 key={prof.id}>{prof.name}</h2>
+                            </>
+                        ))
+                    }
+                    <img src={profileimg}></img>
                     <h2>Tagline</h2>
                 </div>
                 <div className='dp-desc blur-back'>
@@ -50,6 +76,11 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
+            <form onSubmit={handleSubmit}>
+                <input placeholder='Name' onChange={inputsHandler} value={person.name} name='name'></input>
+                <input placeholder='roll' onChange={inputsHandler} value={person.rollno} name='rollno'></input>
+                <button type='submit'>Submit</button>
+            </form>
         </div>
     )
 }
