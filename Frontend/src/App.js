@@ -3,6 +3,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import Profile from './components/pages/Profile';
 import Home from './components/pages/Home';
+import Login from './components/pages/Login';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -20,7 +21,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-            <Route exact path='/' element={<Home />}></Route>
+            <Route exact path='/' element={<Login />}></Route>
             <Route exact path='/profile' element={<Profile profile={profile}/>}></Route>
         </Routes>
       </div>
