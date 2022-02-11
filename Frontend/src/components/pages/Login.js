@@ -6,6 +6,23 @@ import "../css/base.css";
 import axios from 'axios';
 
 
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
 export default function Login() {
 const [student, setStudent] = useState(
     {
@@ -29,14 +46,24 @@ function handleChange(e) {
 }
 function handleSubmit(event) {
     event.preventDefault();
-    axios.post("http://127.0.0.1:8000/api/register/", student)
+    axios.post("http://127.0.0.1:8000/api/register/", student, { headers: { 'X-CSRFToken': csrftoken }})
             .then(function(res){
                 console.log(res)
             })
             .catch((error)=>{
                 console.log(error)
             })
-    }
+        }
+    // fetch("http://127.0.0.1:8000/api/register", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type" : "application/json"
+    //     },
+    //     body: JSON.stringify(student)
+    // }).then((res) => res.json())
+    // .then((result) => console.log(result))
+    // .catch((err) => console.log(err))
+    // }
 return (
     <div className="Login">
         <div className="head">Welcome To The YearBook!
