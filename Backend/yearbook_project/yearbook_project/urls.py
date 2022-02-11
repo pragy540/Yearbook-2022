@@ -18,10 +18,10 @@ from django.urls import path,include
 from rest_framework import routers                 
 from yearbook_app import views                             
 
-router = routers.DefaultRouter()                   
-router.register(r'profiles', views.ProfileView, 'yearbook_app')  
+# router = routers.DefaultRouter()                   
+# router.register(r'profiles', views.ProfileView, 'yearbook_app')  
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))             
+    path('api/', include('yearbook_app.urls'))             
 ]
