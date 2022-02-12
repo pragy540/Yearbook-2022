@@ -55,6 +55,7 @@ def register(request) :
         request.session['otp'] = otp
         request.session['otp_email'] = email
         request.session.save()
+        print(request.session.get('otp'))
         return Response({"status": "OTP sent successfully to your LDAP Id. It is `${otp}`"})
 
         html_content = "<p> Otp for login is: <b>" + f"{otp}" + "</b></p>"
