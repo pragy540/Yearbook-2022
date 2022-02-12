@@ -9,19 +9,26 @@ import axios from 'axios';
 
 function App() {
   var [profile, setProfile] = useState([])
+  // useEffect(()=>{
+  //   axios.get("http://127.0.0.1:8000/api/profile/")
+  //     .then(res => {
+  //       profile = res.data;
+  //       setProfile(profile)
+  //     })
+  //     // console.log(profile)
+  // },[])
+  const setstudentData = (student) => {
+      setProfile(student)
+      localStorage.setItem('profile', student)
+  }
   useEffect(()=>{
-    axios.get("http://127.0.0.1:8000/api/profile/")
-      .then(res => {
-        profile = res.data;
-        setProfile(profile)
-      })
-      // console.log(profile)
-  },[])
+    setProfile(localStorage.getItem('profile'))
+  })
   return (
     <Router>
       <div className="App">
         <Routes>
-            <Route exact path='/' element={<Login />}></Route>
+            <Route exact path='/' element={<Login setstudentData={setstudentData}/>}></Route>
             <Route exact path='/profile' element={<Profile profile={profile}/>}></Route>
         </Routes>
       </div>

@@ -10,7 +10,7 @@ from . import models
 from .forms import *
 from .options import *     
 import urllib, base64, json, ssl
-
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 # class ProfileView(viewsets.ModelViewSet):  
 #     # serializer_class = ProfileSerializer 
@@ -33,7 +33,7 @@ import urllib, base64, json, ssl
 #         return Response(person_serializer.data)
 #     else:
 #         return Response({'status': 'Person already created'})
-
+@ensure_csrf_cookie
 @api_view (['POST'])
 def register(request) :
     req_data = request.data
@@ -52,6 +52,7 @@ def register(request) :
         import random
         otp = random.randint(100000,999999)
         print("The otp is ", otp)
+        request.session['sso_id'] = sso
         request.session['otp'] = otp
         request.session['otp_email'] = email
         request.session.save()
@@ -93,4 +94,10 @@ def register(request) :
         return Response({'status': 'already exists'})
     return Response({'status': 'otp entered is incorrect'})
 
-
+@api_view(['GET'])
+def profile(request):
+    # req_data = request.session\
+    print(request.session['user_id'])
+    student = Student.objects.get(sso_id = request.session['user_id'])
+    data_serializer = serializers.StudentSerializer(student)
+    return Response(data_serializer.data)

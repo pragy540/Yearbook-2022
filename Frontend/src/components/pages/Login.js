@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import "../css/Login.css";
 import "../css/base.css";
 import axios from 'axios';
-
+import { Navigate } from 'react-router-dom';
 
 function getCookie(name) {
     var cookieValue = null;
@@ -23,7 +23,7 @@ function getCookie(name) {
 }
 var csrftoken = getCookie('csrftoken');
 
-export default function Login() {
+export default function Login({setstudentData}) {
 const [student, setStudent] = useState(
     {
         first_name: '',
@@ -33,6 +33,7 @@ const [student, setStudent] = useState(
         otp_field: ''
     }
 )
+const [redirect, setRed] = useState(false)
 
 function validateForm() {
     return student.email.length > 0
@@ -45,15 +46,19 @@ function handleChange(e) {
     setStudent( {...student, [e.target.name]: e.target.value} )
 }
 function handleSubmit(event) {
+    console.log(student)
     event.preventDefault();
     axios.post("http://127.0.0.1:8000/api/register/", student, { headers: { 'X-CSRFToken': csrftoken }})
             .then(function(res){
                 console.log(res)
+                
+                setRed(!redirect)
             })
             .catch((error)=>{
                 console.log(error)
             })
         }
+    
     // fetch("http://127.0.0.1:8000/api/register", {
     //     method: "POST",
     //     headers: {
@@ -64,6 +69,9 @@ function handleSubmit(event) {
     // .then((result) => console.log(result))
     // .catch((err) => console.log(err))
     // }
+    if (redirect) {
+        return <Navigate to="/profile"></Navigate>
+    }
 return (
     <div className="Login">
         <div className="head">Welcome To The YearBook!
@@ -133,7 +141,7 @@ return (
         Generate OTP
         </Button>   
         :
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
+        <Button block size="lg" type="submit" disabled={!validateForm()} onClick={() => setstudentData(student.email)}>
         Submit
         </Button>
 }

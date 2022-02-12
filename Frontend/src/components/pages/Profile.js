@@ -40,13 +40,8 @@ const Profile = ({profile}) => {
             <div className='dp-section'>
                
                 <div className='dp blur-back'>
-                    {
-                        profile.map((prof)=>(
-                            <>
-                                <h2 key={prof.id}>{prof.name}</h2>
-                            </>
-                        ))
-                    }
+                    <h2>{profile}</h2>
+                    {/* <h3>{profile.sso_id}</h3> */}
                     <img src={profileimg}></img>
                     <h2>Tagline</h2>
                 </div>
