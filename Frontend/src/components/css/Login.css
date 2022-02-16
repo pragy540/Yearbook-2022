@@ -1,50 +1,50 @@
 @media all and (min-width: 480px) {
-.body{
-    padding-left: 30px;
-    background-color: white;
-    border-left: 100px;
-    width:500px;
+    .body {
+        background-color: white;
+        border-left: 100px;
+        width: 500px;
+        margin: auto;
+    }
+    .Login {
+        padding: 20px;
+        height: 100%;
+        background-color: red;
+        font-size: 20px;
+        font-weight: bold;
+        display: block;
+        margin: auto;
+    }
+    .head {
+        padding-top: 40px;
+        padding-left: 30px;
+        font-weight: bolder;
+        background-color: white;
+        width: 500px;
+        font-size: 30px;
+        font-family: 'Times New Roman';
+    }
+    .head2 {
+        padding-top: 10px;
+        padding-left: 30px;
+        padding-bottom: 40px;
+        font-size: 20px;
+        font-weight: normal;
+        background-color: white;
+        width: 500px;
+    }
+    .Login form {
+        margin: 0 auto;
+        width: 500px;
+        background-color: white;
+        border-radius: 10%;
+    }
+    .description {
+        padding-top: 10px;
+        font-size: 13px;
+        padding-bottom: 30px;
+        font-weight: lighter;
+    }
+    .btn {
+        color: red;
+    }
 }
-.Login {
-    padding: 20px;
-    height: 100%;
-    background-color: red;
-    font-size: 20px;
-    font-weight: bold;
-    display:block;
-}
-.head{
-    padding-top: 40px;
-    padding-left: 30px;
-    font-weight: bolder;
-    background-color: white;
-    width: 500px;
-    font-size: 30px;
-    font-family: 'Times New Roman';
-}
-.head2{
-    padding-top: 10px;
-    padding-left: 30px;
-    padding-bottom: 40px;
-    font-size: 20px;
-    font-weight: normal;
-    background-color: white;
-    width: 500px;
-}
-.Login form {
-    margin: 0 auto;
-    width: 500px;
-    background-color: white;
-}
-.description{
-    padding-top: 10px;
-    font-size: 13px;
-    padding-bottom: 30px;
-    font-weight: lighter;
-}
-.btn{
-    color:red;
-}
-}
-
-
