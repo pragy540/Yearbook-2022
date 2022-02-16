@@ -31,7 +31,14 @@ const Profile = ({profile}) => {
     }
      
     return (
-        <div>
+        <div class = "row">
+            <div className="col-md-5">
+                hello
+            </div>
+        </div>
+        
+        
+/*         <div>
             <div className="background">
         <div className="shape"></div>
         <div className="shape"></div>
@@ -41,7 +48,6 @@ const Profile = ({profile}) => {
                
                 <div className='dp blur-back'>
                     <h2>{profile}</h2>
-                    {/* <h3>{profile.sso_id}</h3> */}
                     <img src={profileimg}></img>
                     <h2>Tagline</h2>
                 </div>
@@ -76,7 +82,7 @@ const Profile = ({profile}) => {
                 <input placeholder='roll' onChange={inputsHandler} value={person.rollno} name='rollno'></input>
                 <button type='submit'>Submit</button>
             </form>
-        </div>
+        </div> */
     )
 }
 
