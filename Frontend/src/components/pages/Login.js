@@ -74,14 +74,15 @@ function handleSubmit(event) {
     }
 return (
     <div className="Login">
-        <div className="head">Welcome To The YearBook!
+        
+        <div className="body">
+    <Form onSubmit={handleSubmit}>
+    <div className="head">Welcome To The YearBook!
         <br />
         </div>
         <div className="head2">
         Fill the form below to login
         </div>
-        <div className="body">
-    <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="firstname">
         <Form.Label>First name:</Form.Label>
         <br />
@@ -150,7 +151,6 @@ return (
 
     </Form>
     <br/>
-    </div>
-    </div>
+    </div></div>
 );
 }

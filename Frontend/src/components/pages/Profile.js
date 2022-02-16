@@ -31,6 +31,13 @@ const Profile = ({profile}) => {
     }
      
     return (
+/*         <div class = "row">
+            <div className="col-md-5">
+                hello
+            </div>
+        </div> */
+        
+        
         <div>
             <div className="background">
         <div className="shape"></div>
@@ -41,7 +48,6 @@ const Profile = ({profile}) => {
                
                 <div className='dp blur-back'>
                     <h2>{profile}</h2>
-                    {/* <h3>{profile.sso_id}</h3> */}
                     <img src={profileimg}></img>
                     <h2>Tagline</h2>
                 </div>
@@ -59,16 +65,24 @@ const Profile = ({profile}) => {
             <div className='image-gallery blur-back'>
                 <div className='add-image'><IoAdd></IoAdd></div>
                 <h1>Image Gallery</h1>
-                <div className='gallery'>
-                    <div className='big-image'>
+                <div className='gallery row '>
+{/*                     <div className='big-image'>
                         <img src={dummy1}></img>
-                    </div>
-                    <div className='small-images'>
-                    <img src={dummy1}></img>
-                    <img src={dummy1}></img>
-                    <img src={dummy1}></img>
-                    <img src={dummy1}></img>
-                    </div>
+                    </div> */}
+                    
+                        <div className="col">
+                            <img src={dummy1} className = "img-fluid"></img>
+                        </div>
+                        <div className="col">
+                            <img src={dummy1} className = "img-fluid"></img>
+                        </div>
+                        <div className="col">
+                            <img src={dummy1} className = "img-fluid"></img>
+                        </div>
+                        <div className="col">
+                            <img src={dummy1} className = "img-fluid"></img>
+                        </div>
+                    
                 </div>
             </div>
             <form onSubmit={handleSubmit}>

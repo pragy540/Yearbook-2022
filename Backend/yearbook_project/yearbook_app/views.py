@@ -52,6 +52,10 @@ def register(request) :
         import random
         otp = random.randint(100000,999999)
         print("The otp is ", otp)
+        if Student.objects.filter(sso_id = sso).exists():
+            print("User exists")
+        else:
+            print("User does not exist")
         request.session['sso_id'] = sso
         request.session['otp'] = otp
         request.session['otp_email'] = email
