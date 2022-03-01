@@ -9,3 +9,4 @@ from . import models
 # admin.site.register(models.Profile, ProfileAdmin)
 admin.site.register(models.Student)
 admin.site.register(models.Student_Profile)
+admin.site.register(models.Post)

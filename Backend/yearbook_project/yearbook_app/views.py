@@ -104,3 +104,36 @@ def profile(request):
     student = Student.objects.get(sso_id = request.session['user_id'])
     data_serializer = serializers.StudentSerializer(student)
     return Response(data_serializer.data)
+
+@api_view(['GET']) 
+def sortscroll(request):
+    # print sort_like
+    # if param == 'false':
+    #     sort_like = False
+
+    """
+    This function will return in json form the list of all the posts which have been added. Javascript then can populate this view.
+    """
+    # student = Student.objects.get(sso_id=request.session['user_id'])
+    # start = int(start)
+    # end = int(end)
+    # objects=[]
+    # a = Post.objects.all()
+    # likes = a[1]['likes']
+    # print likes
+    #objects_trunc=Post.objects.order_by('-like')[start:end]
+
+    # posts = Post.objects.all().annotate(total=Count("like")).order_by('-total')
+    # objects_trunc=posts[start:end]
+
+    # new_start = end
+    # new_end = end + 5
+    # posts_dict = []
+    # for post in objects_trunc:
+    #     post_dict = convertToDict(post, student)
+    #     posts_dict.append(post_dict)
+    #     # print posts_dict
+    # return render(request, 'infy-scroll.html', {'student':student, 'posts':posts_dict, 'new_start':new_start, 'new_end':new_end,'sort_lke':sort_like})
+    data = Post.objects.all()
+    data_serializer = serializers.PostSerializer(data, many=True)
+    return Response(data_serializer.data)

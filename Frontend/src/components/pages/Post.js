@@ -1,6 +1,6 @@
 import React from 'react'
 import "../css/Post.css";
-const Post = () => {
+const Post = ({posts}) => {
   return (
       <div>
     <div className="img-post">
@@ -58,17 +58,17 @@ const Post = () => {
     </div>
     <br/>
     <div className="img-post">
+        {
+            posts.map((post)=>(
+
+        <>
         <div classNameName="pfp-row">
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANsAAADmCAMAAABruQABAAAAh1BMVEX39/cAAAD////7+/vNzc3z8/Pt7e1+fn7BwcGcnJzy8vLa2trX19fo6Oirq6vKyspJSUlkZGSPj49ubm43Nzfh4eE9PT22trYWFhaurq4tLS1QUFB3d3eIiIgkJCRycnJdXV0dHR2ioqINDQ0xMTGWlpZVVVUXFxdfX186OjqNjY1CQkKEhIRG2GPnAAAN0ElEQVR4nO1da1/qPAzfaWDcQUUE9YCAerzx/T/fM2BNu0u3JukAnx//l+LWZm3uaRpFV1xxxRVXXHHFFTYggcpj/8dzT0yEI03xsDvv3e2mt+t/e6xvp7u73rw7jI80nnuSdOzJiobz9+nDHzfup+/zYfSrCEzogsF8d19BVYbCznwAv4K+ZL1mj7evnnQhbsezZP3OPfkqgIpauxWVrhSr3SS6VPKSfTV5IS9YFi9duEDylBp2FjLCDnjtDBMpdEEA1R9/1c56sVmtVpuP2qW937YvZvFAzTrOiS5+pnfj7nAU9w9KfK+y+/Fo2H28e7lxr3NndhHUgWp9Or7/33FrBGVGSGqqQDx87DgU4Gfr7NSBmtyUTe1frxUfiKp+ek9iv7Vdl73iZnJW6pI1+ylO6uluElGU1d6Eab2XqPqf860dqMFzcT5blhLeq/xtcQc8D85DnYpfCiv2LrAuEvJGvbf8K6fx6TUCqF5+Gi8tqdmUkDf8m39t79RLp1pP2Rl89PpB5pCYbduc1fbUOuXSQZT7uvfzgMaEUt2chPobnWzpVDerdX9CS+tE/mblyqJ7mqWDKGuFfDWhhwrapXOKpVODDKdt5g2xOqhuhu+eBo0vnRpnhVjU3IgA28xY42aJg2hqj3Y7anY4FWeGmza5L9XI3o8JgzfNA4m5am/Mp+a+pZrYX/E0ghlgZw86aYi4LKs1NUpx2JbtzTbDdGppc9rptGmydDbXLRsgTk0b/3rusee2RAk9NoDlP26aVzU5qJklxNZh47QQWTbQun16nwqiWzOBm5AMAZFlAC3P4i6CujNT+AlHHERWwObErGZgM91DKOIyq3Yy0V+EalkrF4jnwIqKDM8Z81UzM5HnILQpw8Wvs/PGDGG0wbncBvjKynhrHyN2nOeYFY7abRBlSyE25mVHTJwV8tnEvCntA1jd3stN+s3f1svxkBTAtN9lEdcTEmcJpwWLNFBRt/Pxp4Dn3oAVYoHYbEtZoAGGZjacDalUa1qkK8XbNuZEaWNjOg8E7A99E/RhiBEF46cyogxeGPkaMNJy0ecTp4z0p8cIAcYeWdQp3d20NtMze1eqb3zJnPoSUN2aNdP4JktN1TUPM4kD42aTRZKKb8voKMWKbOsoEySa8MRt32wc8uDdMiKcWFKXTpm4Novl1D/9+APx8VyMwwM3VP0CaOL+Y+xKKzpClP7QL6bl6vBKdHchxkfpjgmM8GGiioQRq3qGKIitmBtZ8RrxTwy+WOqHBqJEMb4qVRGoR/0kkdnYpNGJQ5Z7JD1obWeaPWJtZTqG3KFIksgE7La0b9LeCGgjco7ZWxQdBei93xD3SWmxiTfeaPvfyISW/4MKi7NoO1K5a5/88ELbJbgrH7yfM4v9ThorE/7lgWa3GsfZX5xoz2Z1OjmiQWQ5bY8vfB/Ar0EzRI2RJsCatitRMHha8239/zRTDWj2sQvE74k1gG2vf0eFTxQktdWhXvhhipM7n+dw2f7SRpmUz5UMgjxPoNDl8Fg49a7/meZ3qEIhFhO0TxqhBeUj0/X/Et11CETanz+kYS0Wqv9XdNtoywat8okyQAwTYHig1pFDjUF0bdTWMVM6vKSCNbJeuKea54xEIHp8yh1jpYIYJTCismbBlU5r0yy75EHuUZUSUIfWVuxn5YPmG9B8KWvXBwA1PjPwehAVANG3kbjbRdA0nGXsVRpeapP+V5caUwulufeYUwfX1t6mgjYU5K+0lydPyt0bA3IUGzbpkxUrjlxJLiwKqALISsBSAxW5VLQtyIktY6kFADnba7jdOW/ct/4uOtK2dMyTA3rFFsbznCoOtyQtuJV5NAToJQjIEs4lVzoXSE//qsL5FQFovvceGE99dTyK+Uiae3ikLZzJxaHNBA8dNgfKA0Zxg/JPJdaDkXbCTenw4pB2Rvr/3LShpHQYVDqYsOJk685MW6T06bLS0AJqAKJTH542Br8ZQV1qLaKKoppzF0EbrkypSYXsxioACiknWSV2WguUM1z64z3nzeenTena3JLfULtx2C0sbawqeWS4Eg0HOsD1yCrYCGmXUOMZx/lrL2tcnD/GTqnRhOzTIcDaORhZKHkaTWnGewPTxqto1Q5amcVY8ZMHbSH9AB5tKOcLv2CEi7UhwtK2k02hoMMwmEP33Q4vplZwVYF3VArN5YJ/imKSGuFKXxyS33jrhpZJQVCixcWrAVaOHiYs8E6BoStQSEChQdjnvNcENkOAHq45QPsxBbMGpQzvvbFrnizwKqx1SKRgUUKaq+CpgEB5fA0mX6TLU6wcSV9bnQtxvjZkCI9p9hm2yv+gNxVTvVW19KODqby1Hoqzf0fVTaty0mi7ZskDNYuU0qZjWTnljZYm6wBPwGT3ETLlnWNXnF2Jh+BB29g1SSZYh9FAl9jlsjlocnGCJfYBkDBgCUr04HJGFwpxlskV1FLeg5o5raRBSFtYFcD0j5uhDXd6KPD4TfNVWNpCVIVaqMpbn5q2sKEg7knSZvZkAt+uvD7g2bSN0RZUC5Bz+TW0ifRb5qi0HFvmWWuXfhPZJYGdHJZ2s6yjvF2iHXL2gfBwpC2YLI/2ZK7OGqU4c69HdnsRIbif1+UHCP23PQptMZl44k4ALb84/0sabODk9Q6we1SIwD5sr2NthWI0SGt5Wdm34xti2SGqFPxGmjqj8VSIT+qJ8U/xA8hN5pWghZQzzoXJwcJmpbxdqgnWkj5AuvS2ELpFOcdyL/AtsuACt4PAARgWKYh6dFO4BmVKnEQVyDrJoPlQiACiYSLr5iLydtgtew5As69g1uCkWMlma4SSHjOecNXQ+Y6sU0klnyiVMsxEA47AL1jghbTNyKkKKKm1RiXgdUjOCeAXLvPCvgbpa0oCt1X1GQSYgwhkMM1/PbCujymRSCgomV6OhmLTJhu3qj4GP7hUmHAZTtgoDUVJmT2q6zPqjlrVgB3P4yWmEFhAWVpjqE/wy5resTUcs2tbftjSjh9oUjBDJvgeXsiL347qAAyWlDrXGA6SMhzviId0S2p2c5x+SH/lxitSMLUArz4CgYUSjp/1MTKZhjNHVikQbhb8oI46bjQ2ufEg/R6OaSJT3LVnG5B2flzh+B5GsYlwSFNM4Iq24J4Vtj5lqG+hbMbwqvNsAxYxCDclXZpsZKQZdnKW8KF/+ibdIdTTArQuVCUDap3qZls8JCaUlNRTw8QeSMXx9EapcG8xby3tgUvU37xGi9ZwmpkqqkpNR06ZgxrZHUfrwY/Ta+g3Ve03VLtCCyiCtr8CvxeOZWzJShcG1e6X9FPa7XRrIAtvRVb5f2WttVG7Qjshyl1cUgGhwrE5qdpNQrUrDDpF/iwn7pGOGqemztlU1En6Mh+H9DMraf3NyqaMCqdur2EnKqFh7t1igVlwYc1YB+hqI6tmRtK94hk44dWBWsNgDKPeJsWeElKt43nUQ2zf6WXzsEkNm0i9AU8NJ3O4zbJ5HbbRikkWMLRb2FdCpm1QsHu1XDElPrI0o+/pI5F+M+6U5xkpvXCilA742iUilxszNK9+62Baq5G7zxsQiqAEm9KM4tsd20gB9qAU91RweRZuDu9Av/kafD+O0q+LLZBNnbR/lt6YglxxQorjcTWpESSEgLt5qFBj4/sGUgs55sIBdiqlGL9GgPMktKIlqnhFZCZwQTvE2UYJzpNii3IiXOAUtRjj4JUWATHVSyv6qPTq5VfOdXkozal3ABkZThfR3uaWAaMlF55MJtuGoksjGL0oqYNY/cXpCVerpo6oCHg9aGh1k1Z0l3MrlclYbEjcwD14RFMEuDWYh8FR2FFy0fyTAoRYHrZu5SZ5LZHgb3tJGhp6E2f5TwEMJ8/KQ5D1jPC8zdG6uofX2eLwEiMVvNwdiIRt9r1GsaScJDQApujf44YXNdzISEs2f/3NVMqwiii3ZRf51G0YgBBHO95qh7GSssJCWau4urK8HdQk0MGOXb9yHCttyT9KkBJnWfRu4kDNAjaN20bugSzSpInkrFB37JeEsrBnMhfbdvk9jDZp0jLZA3HW4e2yXaDUMGSjvxS7QckNqJYYCXB16+GNVrlI3ngD1d+GPGpq4as3y91ga6f0Qt2+rqw71y17HZRqz9fFSYXDqjOPD1f0Hii0rxZiH/cqEmep5OO5kv21wMMe/X4+Ol7X34+TWTsZz2J8TmdRJ3HW8nwmHBa3eg3wWCU+rNRJuFU7EGeR8vUS8B4EDkJcb50hLmRzMRnk5SgF4kL3KOGC11GuhriQbfT54Hs1lcSFbcLFg+zO7griBvwDYGHwITiOWgPOjbMh8Sy4r7ueuODdcyhYMq5pp+CMTNcUq1nEhTmiTsZN3Dhp+30ZsleJL3oN70cNNQhz/aA/7puTj3lA0Ctj6vF+okU7Qs1Opw2eZydbtCNAzU+jyBfzky7aESoK12rGjTt3zKtZ6kZNOz4vo/NQFoUOSxZwOzvDdrSpG4S8FcHGdHBWyo7UzUJ3n9yjc9410wDV7xHrSWqw6MUXQdkBSnXDNTRfd9XZJEgpQMW9EJbY/SUtGQKUmt3J4uf3d2VZgMvAnrwt1xh73s4ulrAj9kmCyfKnnpQMHpbd/oUTlgL2QfXtp1/0efXZm8S/gy6NhD4YtR6Xt+5M8dvn8rE1gt9FlwbAPt0TjYaT+bj3vev83aOz++6N55PhKDLZp98LgCORBoe/nHtaV1xxxRVXXHHFFVdcccX/Ef8Bzd+tnsX++4kAAAAASUVORK5CYII="/>
             <p>Mayank Kumar Panda</p>
         </div>
         <div className="text-area">
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.
+                {post.content}
             </p>
         </div>
         <div className="button-row">
@@ -99,6 +99,8 @@ const Post = () => {
                 Monday,25/01/2022,10:35 PM
             </div>
         </div>
+        </>
+            ))}
     </div>
     </div>
   )

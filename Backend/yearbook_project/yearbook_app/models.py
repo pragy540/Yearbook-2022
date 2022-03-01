@@ -133,3 +133,6 @@ class Student_Profile(models.Model):
 class Alum(models.Model):
     sso_id = models.CharField(primary_key = True, max_length = 9)
     email = models.EmailField(null=False, blank=False, validators=[validate_email_iitb_domain])
+
+class Post(models.Model):
+    content = models.TextField(max_length = 750)
