@@ -11,6 +11,8 @@ from .forms import *
 from .options import *     
 import urllib, base64, json, ssl
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.core.mail import send_mail
+
 
 # class ProfileView(viewsets.ModelViewSet):  
 #     # serializer_class = ProfileSerializer 
@@ -61,23 +63,25 @@ def register(request) :
         request.session['otp_email'] = email
         request.session.save()
         print(request.session.get('otp'))
-        return Response({"status": "OTP sent successfully to your LDAP Id. It is `${otp}`"})
 
         html_content = "<p> Otp for login is: <b>" + f"{otp}" + "</b></p>"
-        # response = send_mail(email,name,"OTP: YearBook 2021", html_content=html_content,  
-        #             sender_email="sarc@iitb.ac.in", sender_name="SARC", reply_name="SARC", reply_to="no-reply-sarc@iitb.ac.in")
+        # response = send_mail(email,name,"OTP: YearBook 2021", html_content,  
+        #             sender_email="nikhiltiwari1912@gmail.com", sender_name="SARC", reply_name="SARC", reply_to="no-reply-sarc@iitb.ac.in")
+        response = send_mail("OTP for yearbook login", html_content, 'web.sarc.iitb@gmail.com', [email])
         # if response.status_code != 202:
         #     response_iitb_mail = send_sso_mail(email,name,"OTP: YearBook 2021", html_content=html_content,  
         #             sender_email="sarc@iitb.ac.in", sender_name="SARC", reply_name="SARC", reply_to="no-reply-sarc@iitb.ac.in")
         #     if len(response_iitb_mail.keys())!=0:
         #         return({'status': 'OTP not sent, Contact SARC'})
-        #             # return render(request, 'index.html',{'redirect':False, 'form': form, 'alert': 'OTP NOT SENT. Contact Dhairya Jain (9967876281)'})
+                    # return render(request, 'index.html',{'redirect':False, 'form': form, 'alert': 'OTP NOT SENT. Contact Dhairya Jain (9967876281)'})
         # EmailNotifs.objects.create(
         #     email = email,
         #     otp = otp,
         #     first_name = req_data['first_name'],
         #     last_name = req_data['last_name']
         #     )
+        return Response({"status": "OTP sent successfully to your LDAP Id. It is `${otp}`"})
+        
     
     submitted_otp = req_data['otp_field']
     print(submitted_otp)
@@ -101,7 +105,12 @@ def register(request) :
 @api_view(['GET'])
 def profile(request):
     # req_data = request.session\
-    print(request.session['user_id'])
-    student = Student.objects.get(sso_id = request.session['user_id'])
+    # print(request.session['user_id'])
+    user_id = request.query_params.get('user_id')
+    print(user_id)
+    print("printing here")
+    print('user_id', user_id)
+    # user_id = 1001837
+    student = Student.objects.get(sso_id = user_id)
     data_serializer = serializers.StudentSerializer(student)
     return Response(data_serializer.data)

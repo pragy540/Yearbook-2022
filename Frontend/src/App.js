@@ -13,14 +13,14 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 
 function App() {  
   var [profile, setProfile] = useState([])
-  // useEffect(()=>{
-  //   axios.get("http://127.0.0.1:8000/api/profile/")
-  //     .then(res => {
-  //       profile = res.data;
-  //       setProfile(profile)
-  //     })
-  //     // console.log(profile)
-  // },[])
+  useEffect(()=>{
+    axios.get("http://127.0.0.1:8000/api/profile/")
+      .then(res => {
+        profile = res.data;
+        setProfile(profile)
+      })
+      // console.log(profile)
+  },[])
   const setstudentData = (student) => {
       setProfile(student)
       localStorage.setItem('profile', student)

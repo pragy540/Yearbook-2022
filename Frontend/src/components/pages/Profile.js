@@ -13,7 +13,28 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 
-const Profile = ({profile}) => {
+const Profile = ({profile1}) => {
+    var [profile, setProfile] = useState({
+        first_name: '',
+        last_name: '',
+        sso_id: '',
+    })
+    useEffect(()=>{
+        axios.get("http://127.0.0.1:8000/api/profile/?user_id=200010050")
+        // .then((res) => res.json())
+          .then((result) => {
+              console.log(result)
+            setProfile(result.data)
+          })
+          console.log("Profile is" )
+          console.log(profile)
+        //   console.log(res.data)
+      },[])
+    // axios.get("http://127.0.0.1:8000/api/profile/"+{profile}, person)
+    //         .then(function(res){
+    //             console.log(res)
+    //         })
+    const user_id = localStorage.getItem('profile')
     const [person, setPerson] = useState({
         name : '',
         rollno: ''
@@ -24,10 +45,7 @@ const Profile = ({profile}) => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post("http://127.0.0.1:8000/api/addprof/", person)
-            .then(function(res){
-                console.log(res)
-            })
+        
     }
      
     return (
@@ -47,13 +65,13 @@ const Profile = ({profile}) => {
             <div className='dp-section'>
                
                 <div className='dp blur-back'>
-                    <h2>{profile}</h2>
+                    <h2>{profile.sso_id}</h2>
                     <img src={profileimg}></img>
                     <h2>Tagline</h2>
                 </div>
                 <div className='dp-desc blur-back'>
                 <div className='edit-profile'><IoPencilSharp></IoPencilSharp></div>
-                    <h2>Name</h2>
+                    <h2>Name: {profile.first_name}</h2>
                     <h3>Description</h3>
                     <h3>In My insti life, never have I ever:</h3>
                     <div className='share-social'>
